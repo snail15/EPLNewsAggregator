@@ -32,3 +32,41 @@ class Player(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __repr__(self):
         return "Player: {0}, {1}".format(self.name, self.playing_team)
+
+class Standing(models.Model):
+    position = models.IntegerField(default=0)
+    name = models.CharField(max_length=40)
+    gp = models.IntegerField()
+    won = models.IntegerField()
+    draw = models.IntegerField()
+    lost = models.IntegerField()
+    gs = models.IntegerField()
+    ga = models.IntegerField()
+    gd = models.IntegerField()
+    point = models.IntegerField()
+    recent_form = models.CharField(max_length=20)
+    status = models.CharField(max_length=30)
+    logo_url = models.CharField(max_length=100)
+
+class Score(models.Model):
+    name = models.CharField(max_length=55)
+    logo_url = models.CharField(max_length=255)
+    goal = models.IntegerField()
+    nationality = models.CharField(max_length=30)
+    img_url = models.CharField(max_length=255, default=None)
+
+class Assist(models.Model):
+    name = models.CharField(max_length=55)
+    logo_url = models.CharField(max_length=255)
+    assist = models.IntegerField()
+    nationality = models.CharField(max_length=30)
+    img_url = models.CharField(max_length=255, default=None)
+
+class Card(models.Model):
+    name = models.CharField(max_length=55)
+    logo_url = models.CharField(max_length=255)
+    yellow_card = models.IntegerField(default=0)
+    red_card = models.IntegerField(default=0)
+    nationality = models.CharField(max_length=30)
+    img_url = models.CharField(max_length=255, default=None)
+    total_card = models.IntegerField(default=0)

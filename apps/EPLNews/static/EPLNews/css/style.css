@@ -19,11 +19,11 @@
 }
 
 #news-carousel {
-    height: 600px;
+    height: 200px;
 }
 
 .w-100 {
-    height: 600px;
+    height: 200px;
 }
 
 .carousel-caption {
@@ -35,7 +35,7 @@
 }
 
 .article-thumbnail {
-   
+    width: 100%;
     overflow: hidden;
     -webkit-transform: scale(1.0);
     -ms-transform: scale(1.0);
@@ -50,13 +50,73 @@
     -ms-transform: scale(0.95);
     transform: scale(0.95);
 }
+
+.news-row .col-sm-4 {
+    padding: 0;
+}
+
+.header-news-row .col-sm-12 {
+    padding-left: 0;
+}
+
+.epl-table img {
+    height: 15px;
+    width: 15px;
+}
+
+.score-table img {
+    height: 35px;
+    width: 35px;
+}
+
+.epl-table {
+    width: 100%;
+}
+#team-logo-td {
+    padding: 0;
+}
+.epl-table th,
+.score-table th,
+.score-table tr,
+.epl-table tr {
+    text-align: center;
+    padding: 0;
+    font-size: 80%;
+}
+
+.epl-table td,
+.score-talbe td {
+    text-align: center;
+    font-size: 75%;
+    padding: 0;
+}
+
+.stat-row h5 {
+    text-align: center;
+}
+
+.stat-header {
+    text-align: center;
+}
+/* 
+.epl-table thead{
+    font-size: 2%;
+}
+
+.epl-table tbody {
+    font-size: 1%;
+}
+
+.table-col {
+    margin-right: 50%;
+} */
 /* Side Bar */
 
 .nav-box {
     background-color: #44709a;
     color: wheat;
     padding-top: 23%;
-    height: 5000px;
+    height: 2200px;
 }
 
 .nav-box ul{
@@ -142,7 +202,4 @@
     * {
         font-size: 20px;
     }
-}
-@media only screen and (max-width: 1201px) {
-    
 }

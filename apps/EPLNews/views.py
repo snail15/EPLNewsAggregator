@@ -28,6 +28,7 @@ def index(request):
     }
     return render(request, 'EPLNews/index.html', context)
 
+@csrf_exempt
 def team_news(request):
     team_name = request.POST['team_name']
     all_news = News.objects.filter(teams=Team.objects.filter(api_name=team_name)).order_by('-created_at')

@@ -38,7 +38,8 @@ $(document).ready(function () {
             url: 'team_news',
             method: 'POST',
             data: {
-                'team_name': $(this).attr('linkteam')
+                'team_name': $(this).attr('linkteam'),
+                'csrfmiddlewaretoken': jQuery([name='csrfmiddlewaretoken'])
             },
             success: function(serverResponse){
                 console.log('clicked2')

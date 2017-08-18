@@ -32,6 +32,8 @@ $(document).ready(function () {
 
     $('.js-team-news-link').click(function(){
         console.log('clicked1');
+        $('.js-team-news-link').attr('id','');
+        $(this).attr('id', 'underline');
         $.ajax({
             url: 'team_news',
             method: 'POST',

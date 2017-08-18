@@ -1,6 +1,8 @@
 import json, requests
 from pprint import pprint
 from apps.EPLNews.models import *
+from threading import Timer
+from time import sleep
 
 SKY_API_BASE = "https://skysportsapi.herokuapp.com"
 # API_KEY = "9ynWTXljOQ3Mw4vP7HMEN6ymaHxVydbh1jINFhxv"
@@ -16,7 +18,34 @@ ENDPOINT_GENERAL_NEWS_SKY = "/sky/getnews/football/v1.0/"
 ENDPOINT_TEAM_NEWS_SKY = "/sky/football/getteamnews/{0}/v1.0/"
 SKYSPORTS_SOURCE_ID = 1
 
+TRIGGER = True
+
 # DEFAULT_HEADER = {"X-API-Key":API_KEY}
+
+class RepeatedTimer(object):
+    def __init__(self, interval, function, *args, **kwargs):
+        self._timer     = None
+        self.interval   = interval
+        self.function   = function
+        self.args       = args
+        self.kwargs     = kwargs
+        self.is_running = False
+        self.start()
+
+    def _run(self):
+        self.is_running = False
+        self.start()
+        self.function(*self.args, **self.kwargs)
+
+    def start(self):
+        if not self.is_running:
+            self._timer = Timer(self.interval, self._run)
+            self._timer.start()
+            self.is_running = True
+
+    def stop(self):
+        self._timer.cancel()
+        self.is_running = False
 
 teams = {'arsenal': 'Aresenal', 'bournemouth': 'AFC Bournemouth', 'brighton-and-hove-albion': 'Brighton and Hove Albion', 'burnley': 'Burnely',
             'chelsea': 'Chelsea', 'crystal-palace': 'Crystal Palace', 'everton': 'Everton', 'huddersfield-town': "Huddersfield Town", 'leicester-city': 'Leicester City',
@@ -106,10 +135,26 @@ def get_team_logo_url(team_name):
         'West Ham United': 'EPLNews/img/westham_logo.png',
     }.get(team_name, None)
 
-get_general_news_sky()
-get_team_news_sky(teams)
 
-get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'player_stat')
-get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'standing')
+while TRIGGER:
+    general_news = RepeatedTimer(600, get_general_news_sky)
+    team_news = RepeatedTimer(500, get_team_news_sky, teams)
+    standing = RepeatedTimer(400, get_sportsmonk_data, SPORTSMONK_PAYLOAD,'standing')
+    player_stat = RepeatedTimer(300, get_sportsmonk_data, SPORTSMONK_PAYLOAD,'player_stat')
+    try:
+        sleep(1000) # your long-running job goes here...
+    finally:
+        general_news.stop() # better in a try/finally block to make sure the program ends!
+        team_news.stop()
+        standing.stop()
+        player_stat.stop()
+        progress.stop()
+        TRIGGER = False
+
+# get_general_news_sky()
+# get_team_news_sky(teams)
+
+# get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'player_stat')
+# get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'standing')
 
 

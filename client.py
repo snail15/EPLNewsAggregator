@@ -136,25 +136,24 @@ def get_team_logo_url(team_name):
     }.get(team_name, None)
 
 
-while TRIGGER:
-    general_news = RepeatedTimer(600, get_general_news_sky)
-    team_news = RepeatedTimer(500, get_team_news_sky, teams)
-    standing = RepeatedTimer(400, get_sportsmonk_data, SPORTSMONK_PAYLOAD,'standing')
-    player_stat = RepeatedTimer(300, get_sportsmonk_data, SPORTSMONK_PAYLOAD,'player_stat')
-    try:
-        sleep(1000) # your long-running job goes here...
-    finally:
-        general_news.stop() # better in a try/finally block to make sure the program ends!
-        team_news.stop()
-        standing.stop()
-        player_stat.stop()
-        progress.stop()
-        TRIGGER = False
+# while TRIGGER:
+#     general_news = RepeatedTimer(600, get_general_news_sky)
+#     team_news = RepeatedTimer(500, get_team_news_sky, teams)
+#     standing = RepeatedTimer(400, get_sportsmonk_data, SPORTSMONK_PAYLOAD,'standing')
+#     player_stat = RepeatedTimer(300, get_sportsmonk_data, SPORTSMONK_PAYLOAD,'player_stat')
+#     try:
+#         sleep(1200) # your long-running job goes here...
+#     finally:
+#         general_news.stop() # better in a try/finally block to make sure the program ends!
+#         team_news.stop()
+#         standing.stop()
+#         player_stat.stop()
+#         progress.stop()
+#         TRIGGER = False
 
-# get_general_news_sky()
-# get_team_news_sky(teams)
-
-# get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'player_stat')
-# get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'standing')
+get_general_news_sky()
+get_team_news_sky(teams)
+get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'player_stat')
+get_sportsmonk_data(SPORTSMONK_PAYLOAD, 'standing')
 
 

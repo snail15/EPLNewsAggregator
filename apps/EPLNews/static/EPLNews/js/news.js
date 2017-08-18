@@ -39,7 +39,7 @@ $(document).ready(function () {
             method: 'POST',
             data: {
                 'team_name': $(this).attr('linkteam'),
-                'csrfmiddlewaretoken': jQuery([name='csrfmiddlewaretoken'])
+                "csrf_token": csrf_token
             },
             success: function(serverResponse){
                 console.log('clicked2')

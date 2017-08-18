@@ -8,7 +8,7 @@ from django.contrib import messages
 # import bcrypt
 
 # Create your views here.
-
+@csrf_exempt
 def index(request):
     all_news = News.objects.filter(teams=None).order_by('-created_at')
     top_news = all_news[0]

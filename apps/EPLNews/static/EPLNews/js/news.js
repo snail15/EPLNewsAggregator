@@ -25,9 +25,9 @@ $(document).ready(function () {
     
     activate_carousel;
 
-    $.ajaxSetup({
-        headers: { "X-CSRFToken": getCookie("csrftoken") }
-    });
+    // $.ajaxSetup({
+    //     headers: { "X-CSRFToken": getCookie("csrftoken") }
+    // });
  
 
     $('.js-team-news-link').click(function(){
@@ -39,7 +39,7 @@ $(document).ready(function () {
             method: 'POST',
             data: {
                 'team_name': $(this).attr('linkteam'),
-                "csrf_token": csrf_token
+                'csrfmiddlewaretoken': jQuery([name='csrfmiddlewaretoken'])
             },
             success: function(serverResponse){
                 console.log('clicked2')
